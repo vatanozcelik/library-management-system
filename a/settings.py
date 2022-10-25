@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-as4=lkd7ggp0pv)h2p$ogkj4qqbxu)*=o87^a!q@8kvn6w6d=r
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['fiddler-on-the-roof.herokuapp.com']
 
 
 # Application definition
@@ -122,9 +122,6 @@ USE_TZ = True
 
 STATIC_ROOT = [os.path.join(BASE_DIR, "staticfiles")]
 STATIC_URL = "/static/"
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
 
 
 # Default primary key field type
