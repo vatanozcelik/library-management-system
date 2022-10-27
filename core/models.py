@@ -1,12 +1,30 @@
+from email.policy import default
 from django.db import models
 from django.contrib.auth.models import User
+
+
+class Language(models.Model):
+    name = models.CharField(max_length=50, blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=50, blank=True, null=True)
+
+    def __str__(self):
+        return self.name
 
 
 class Book(models.Model):
     title = models.CharField(max_length=50, blank=True, null=True)
     contributor = models.ManyToManyField(
         'Contributor', through='BookContributor')
+    category = models.ManyToManyField('Category', through='BookCategory')
     user = models.ManyToManyField(User, through='UserBook')
+    language = models.ForeignKey(
+        'Language', on_delete=models.CASCADE, null=True, blank=True)
     slug = models.SlugField()
     description = models.TextField(blank=True, null=True)
 
@@ -17,6 +35,14 @@ class Book(models.Model):
 class UserBook(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     book = models.ForeignKey('Book', on_delete=models.CASCADE)
+
+
+class BookCategory(models.Model):
+    book = models.ForeignKey('Book', on_delete=models.CASCADE)
+    category = models.ForeignKey('Category', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.book
 
 
 class Contributor(models.Model):

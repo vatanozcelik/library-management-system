@@ -1,9 +1,13 @@
 from django.contrib import admin
 from core.models import (
+    BookCategory,
+    Language,
+    Category,
     Book,
     BookContributor,
     Contributor,
     UserBook,
+
 )
 
 
@@ -21,15 +25,28 @@ class BookContributorAdmin(admin.ModelAdmin):
 
 class UserBookAdmin(admin.ModelAdmin):
     list_display = (
-        'get_contributor'
+        'get_contributor',
     )
 
-    @admin.display(ordering='book__contributor', description='Book')
+    @admin.display(ordering='contributor__name', description='Book')
     def get_contributor(self, obj):
-        return obj.book.contributor
+        return obj.contributor.name
+
+
+class BookCategoryAdmin(admin.ModelAdmin):
+    list_display = (
+        'get_name',
+    )
+
+    @admin.display(ordering='book__title', description='Book')
+    def get_name(self, obj):
+        return obj.book.title
 
 
 admin.site.register(Book, BookAdmin)
 admin.site.register(BookContributor, BookContributorAdmin)
 admin.site.register(Contributor)
-admin.site.register(UserBook)
+admin.site.register(UserBook, UserBookAdmin)
+admin.site.register(Language)
+admin.site.register(Category)
+admin.site.register(BookCategory, BookCategoryAdmin)
