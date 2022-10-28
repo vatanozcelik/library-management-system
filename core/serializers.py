@@ -32,3 +32,4 @@ class BookSerializer(ModelSerializer):
         fields = (
             'id', 'title', 'slug', 'contributor', 'description', 'user'
         )
+        lookup_field = 'slug'
