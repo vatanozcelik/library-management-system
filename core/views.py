@@ -8,10 +8,14 @@ from rest_framework.generics import (
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.mixins import CreateModelMixin
 from django.http import Http404
-
+from django.shortcuts import render
 
 from core.models import Book
 from core.serializers import BookSerializer
+
+
+def home(request):
+    return render(request, "core/home.html")
 
 
 """

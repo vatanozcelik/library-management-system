@@ -1,4 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
-    <p>Home HTML</p>
+    <div class="container">
+    <p>
+        Django Rest Framework project to create API
+    </p>
+    path("", home), <br>
+    path("list-create/", ListCreateView.as_view(), name="book-list-create"), <br>
+    path("retrive-update-delete/<slug:slug>", RetrieveUpdateDestroyView.as_view(),
+          name="book-retrive-update-delete")
+
+
 {% endblock %}
