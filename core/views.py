@@ -8,14 +8,18 @@ from rest_framework.generics import (
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.mixins import CreateModelMixin
 from django.http import Http404
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.models import User
+from django.views.generic.list import ListView
 
-from core.models import Book
+from core.models import Book, UserBook
 from core.serializers import BookSerializer
 
 
 def home(request):
-    return render(request, "core/home.html")
+    books = Book.objects.all()
+    context = {'books': books}
+    return render(request, "core/home.html", context)
 
 
 """
@@ -52,6 +56,7 @@ class BookList(APIView):
         book.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+
 """
 
 
@@ -66,3 +71,21 @@ class RetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
     serializer_class = BookSerializer
     permission_classes = [IsAuthenticated]
     lookup_field = 'slug'
+
+
+# def profile(request, pk):
+#     user = get_object_or_404(User, pk=pk)
+#     books = UserBook.objects.filter(user=user)
+#     context = {
+#         'books': books
+#     }
+#     return render(request, "core/profile.html", context)
+
+
+class ProfileView(ListView):
+    template_name = "core/profile.html"
+    # queryset = UserBook.objects
+
+    def get_queryset(self, pk):
+        user_books = UserBook.objects.filter(user_id=pk)
+        return user_books

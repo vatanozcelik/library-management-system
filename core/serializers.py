@@ -24,7 +24,7 @@ class UserBookSerializer(ModelSerializer):
 
 
 class BookSerializer(ModelSerializer):
-    contributor = ContributorSerializer(read_only=True, many=True)
+    contributor = ContributorSerializer(read_only=True, many=True, )
     user = UserBookSerializer(read_only=True, many=True)
 
     class Meta:
@@ -32,4 +32,3 @@ class BookSerializer(ModelSerializer):
         fields = (
             'id', 'title', 'slug', 'contributor', 'description', 'user'
         )
-        lookup_field = 'slug'

@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% for book in object_list %}
+        {{book.book.title}} <br>
+        {{book.book.contributor.name}} <br>
+    {% endfor %}
+{% endblock content %}

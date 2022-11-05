@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "users.apps.UsersConfig",
     # 3rd part
     "rest_framework",
+    "django_extensions",
 ]
 
 MIDDLEWARE = [
@@ -84,8 +85,14 @@ WSGI_APPLICATION = "a.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        # "ENGINE": "django.db.backends.sqlite3",
+        # "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "library_management_system_db",
+        "USER": "postgres",
+        "PASSWORD": "1560",
+        "HOST": "localhost",
+        "PORT": "5432",
     }
 }
 
@@ -124,7 +131,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_ROOT = BASE_DIR / "static"
 STATIC_URL = "/static/"
 
 
