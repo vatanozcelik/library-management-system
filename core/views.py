@@ -1,25 +1,31 @@
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
 from rest_framework.generics import (
     ListCreateAPIView,
     RetrieveUpdateDestroyAPIView,
 )
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.mixins import CreateModelMixin
-from django.http import Http404
 from django.shortcuts import render, get_object_or_404
-from django.contrib.auth.models import User
 from django.views.generic.list import ListView
 
-from core.models import Book, UserBook
+from core.models import Book, UserBook, Category
 from core.serializers import BookSerializer
 
 
 def home(request):
     books = Book.objects.all()
-    context = {'books': books}
+    bookCategories = Category.objects.all()
+    context = {'books': books, 'bookCategories': bookCategories}
     return render(request, "core/home.html", context)
+
+def category(request, slug):
+    bookCategories = Category.objects.all()
+    category = get_object_or_404(Category, slug=slug)
+    books = Book.objects.filter(category=category.id)
+    context = {
+        'books': books,
+        'bookCategories': bookCategories
+
+    }
+    return render(request, "core/department.html", context)
 
 
 """

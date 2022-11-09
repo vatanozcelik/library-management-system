@@ -10,6 +10,12 @@ from core.models import (
 )
 
 
+class CategoryAdmin(admin.ModelAdmin):
+    prepopulated_fields = {
+        'slug': ('name',)
+    }
+
+
 class BookAdmin(admin.ModelAdmin):
     list_display = (
         'title', 'get_contributor', 'get_user', 'get_language'
@@ -58,7 +64,7 @@ class BookCategoryAdmin(admin.ModelAdmin):
 
 admin.site.register(Contributor)
 admin.site.register(Language)
-admin.site.register(Category)
+admin.site.register(Category, CategoryAdmin)
 admin.site.register(UserBook, UserBookAdmin)
 admin.site.register(Book, BookAdmin)
 admin.site.register(BookCategory, BookCategoryAdmin)

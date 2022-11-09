@@ -20,6 +20,7 @@ class Contributor(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=50, blank=True, null=True)
+    slug = models.SlugField()
 
     def __str__(self):
         return self.name

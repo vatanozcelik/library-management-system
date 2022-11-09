@@ -1,13 +1,13 @@
 {% extends "base.html" %} {% block main %}
 <div class="row">
-  <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-4 col-xs-6" id="first">
+  <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-4 col-xs-6">
     {% for cat in bookCategories %}
     <ul>
       <li> {{ forloop.counter }} <a href="{% url 'category' slug=cat.slug %} "> {{ cat.name }}</a></li>
     </ul>
     {% endfor %}
   </div>
-  <div class="col-xxl-10 col-xl-10 col-lg-10 col-md-10 col-sm-8 col-xs-6" id="second">
+  <div class="col-xxl-10 col-xl-10 col-lg-10 col-md-10 col-sm-8 col-xs-6">
     <div class="grid">
       {% for book in books %}
       <div class="card">
